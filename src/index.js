@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import TodoList from "./pages/TodoList";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       },
       { path: "/signin", element: <Signin /> },
       { path: "/signup", element: <Signup /> },
+      {
+        path: "/todos",
+        element: (
+          <ProtectedRoute>
+            <TodoList />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
