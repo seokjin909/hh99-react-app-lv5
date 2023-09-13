@@ -7,8 +7,18 @@ const getTodos = async ({ queryKey }) => {
   return response.data;
 };
 
-const addTodo = async (newTodo) => {
+const addTodos = async (newTodo) => {
   await axios.post(`${process.env.REACT_APP_SERVER_URL}/todos`, newTodo);
 };
 
-export { getTodos, addTodo };
+const updateTodos = async (data) => {
+  const { id, isDone } = data;
+  const obj = { isDone: !isDone };
+  await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, obj);
+};
+
+const deleteTodos = async (id) => {
+  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
+};
+
+export { getTodos, addTodos, updateTodos, deleteTodos };

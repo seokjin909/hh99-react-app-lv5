@@ -1,6 +1,6 @@
 import React from "react";
 import { AiFillAliwangwang } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./ui/Button";
 import { useAuthContext } from "../context/AuthContext";
 import { logout } from "../api/singup";
@@ -8,10 +8,13 @@ import { logout } from "../api/singup";
 const BUTTON_CLASS = "transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { user, setUser } = useAuthContext();
   const LogoutHandler = () => {
     setUser(false);
     logout();
+    alert("로그아웃 되었습니다!");
+    navigate("/");
   };
 
   return (
@@ -24,7 +27,9 @@ export default function Navbar() {
         <Link to="/todos">
           <p className={BUTTON_CLASS}>투두 리스트</p>
         </Link>
-        <p className={BUTTON_CLASS}>게시글 보기</p>
+        <Link to="/posts/new">
+          <p className={BUTTON_CLASS}>게시글 작성</p>
+        </Link>
         {user && <Button text={"로그아웃"} onClick={LogoutHandler} />}
         {!user && (
           <>

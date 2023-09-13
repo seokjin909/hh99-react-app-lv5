@@ -1,10 +1,12 @@
 import axios from "axios";
 
+// newUser = { id : 사용자가 입력한 ID, password : 사용자가 입력한 PWD }
 const register = async (newUser) => {
   let resultMessage = "회원가입 처리중...";
   await axios
     .post(`${process.env.REACT_APP_MOCK_SERVER_URL}register`, newUser)
     .then((response) => {
+      console.log(response);
       resultMessage = "회원가입 성공";
     })
     .catch((error) => {
@@ -19,9 +21,10 @@ const login = async (user) => {
   let resultMessage = "로그인 처리중...";
   await axios
     .post(`${process.env.REACT_APP_MOCK_SERVER_URL}login`, user)
-    .then((respone) => {
-      const token = respone.data.token;
+    .then((response) => {
+      const token = response.data.token;
       sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userId", user.id);
       getUser(token);
       resultMessage = "로그인 성공";
     })
@@ -37,14 +40,12 @@ const login = async (user) => {
 const getUser = async (Usertoken) => {
   const hearders = { authorization: `Bearer ${Usertoken}` };
   const response = await axios.get(`${process.env.REACT_APP_MOCK_SERVER_URL}user`, { headers: hearders });
-  console.log(response);
-  console.log(response.status);
   return response;
 };
 
 const logout = () => {
-  alert("로그아웃 되었습니다~");
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("userId");
 };
 
 export { register, login, getUser, logout };

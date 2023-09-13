@@ -10,6 +10,10 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import TodoList from "./pages/TodoList";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import TodoDetail from "./pages/TodoDetail";
+import PostDetail from "./pages/PostDetail";
+import NewPost from "./pages/NewPost";
+import UpdatePost from "./pages/UpdatePost";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +33,34 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <TodoList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/todos/:id",
+        element: (
+          <ProtectedRoute>
+            <TodoDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/posts/:id",
+        element: <PostDetail />,
+      },
+      {
+        path: "/posts/new",
+        element: (
+          <ProtectedRoute>
+            <NewPost />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/update/post/:id",
+        element: (
+          <ProtectedRoute>
+            <UpdatePost />
           </ProtectedRoute>
         ),
       },
