@@ -1,83 +1,60 @@
-<h3>항해99 React Lv.4 - 지금까지 배운 내용을 활용하여 나만의 React App 을 만들어보기 🔥</h3>
-
-# React 과제 Lv. 4
+# React 과제 Lv. 5
 
 <aside>
-💡 **Goal : 로그인/회원가입 기능 추가하기**
+💡 Goal : 나만의 React App 만들기
 
 </aside>
 
-- 지금까지 배운 내용을 활용하여 나만의 React App 을 만들어봅시다.
-  - 레벨 4에서는 로그인, 회원가입 기능을 만들고 5에서 원하는 추가기능을 붙여 볼 거에요!
+- 레벨 4 과제에 살을 붙여, 나만의 React App 을 만들어봅시다.
+    - 주제는 반드시 Todo List가 아니여도 됩니다. 본문과 댓글을 가진 구조의 웹 서비스면 **OK!**
 
 <aside>
-⚙ **features : 구현해야 할 기능이에요.**
+👍 Checklist : 과제 진행 간 고민해야 하는 부분
 
 </aside>
 
-- 로그인, 회원가입 페이지를 각각 구현합니다.
-- 아이디와 비밀번호가 모두 입력되지 않으면, API 요청을 보내지 않도록 합니다.
-- 서버의 에러를 `alert` 또는 직접 만든 모달 등을 통해 유저에게 표시합니다.
-  - id가 중복된 경우
-  - 존재하지 않는 아이디를 입력한 경우
-  - 비밀번호가 잘못된 경우
-- JWT의 유효시간이 만료된 경우, 유저에게 재로그인을 할 것을 표시합니다.
-- 로그인을 하지 않은 경우에는 `로그인/회원가입` 페이지만 접근 가능합니다.
-- 로그인을 이미 한 경우 `로그인/회원가입` 페이지는 접근 할 수 없습니다.
-- 로그아웃 기능을 구현합니다.
+- 상태관리 ( 유지 / 초기화 ) 가 잘 되어있나요?
+- 각 컴포넌트의 재사용성이 높나요?
+- 예외처리가 미흡한 부분은 없나요?
 
-### 참고사항
+<aside>
+⚙ features : 구현해야 할 기능이에요.
 
-- mock 서버에서 발급된 JWT의 유효시간은 60분입니다.
-- mock 서버 URL : http://3.38.191.164/
-- mock 서버 API 명세
-  | 기능 | method | url | request | response | error |
-  | ------------- | ------ | -------- | ------- | -------- | ----- |
-  | 유저 회원가입 | post | register | body |
-  id: string
-  password: string | 201
-  없음 | 401
-  이미 존재하는 유저 id 입니다.
-  (validation)
-  401
-  id 또는 password가 존재하지 않습니다.
-  401
-  id 또는 password가 string이 아닙니다. |
-  | 유저 로그인 | post | login | body
-  id: string
-  password: string | 201
-  token: string
-  {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImtvYjIxMDAiLCJpYXQiOjE2NzI3NTUyMjMsImV4cCI6MTY3Mjc1NTI4M30.aVVgNMb69m4HQ_OxkJ9Rpd5or98OnEMU8SajJZvNnkk"
-  } | 401
-  존재하지 않는 유저입니다.
-  401
-  비밀번호가 일치하지 않습니다.
-  (validation)
-  401
-  id 또는 password가 존재하지 않습니다.
-  401
-  id 또는 password가 string이 아닙니다.
-  |
-  | 유저 인증 확인 | get | user | header
-  authorization: string
-  ex) authorization : Bearer asdffsfsdfafljeope
-  | 200
-  message: string
-  {message: “인증에 성공한 요청입니다.”} | 401
-  토큰이 만료되었습니다. 토큰은 60분간 유지됩니다.
-  401
-  위조되었거나 잘못된 형식의 token입니다.(${err.message})
-  (validation)
-  401
-  header에 authorization 정보가 존재하지 않습니다.
-  401
-  tokenType이 올바르지 않습니다.(보낸 type은 "${tokenType}" 입니다.)
-  401
-  token value가 존재하지 않습니다. |
+</aside>
 
-  - 새벽 5시 마다, 모든 데이터 초기화
+- **(1) 공통**
+    - UI 구현하기
+    - API 명세서 작성하기
+- **(2) 본문 (ex: 할일) CRUD 구현**
+    - 본문 리스트 조회 하기
+    - 본문 조회 하기
+    - 본문 추가 하기
+    - 본문 삭제 하기
+    - 본문 수정 하기
+- **(3) 배포**
+    - json-server 서버 배포
+    - 리액트 프로젝트 배포 (S3, vercel 등 자유)
 
-  ### 코드 컨벤션
+<aside>
+📌 Requirement : 과제에 요구되는 사항이에요.
 
-  데이터베이스는 json-server를 활용하고, React-Query를 사용하여 작업한다.
+</aside>
+
+- **(1) UI/UX**
+    - 창의적인 UI/UX로 과제를 만드세요. (예시는 예시일뿐 입니다)
+    - 예시에 없어도 만들고 싶은 기능이 있다면 **OK!**
+- **(2) 필수 요구 사항**
+    - **동적 라우팅을 사용**하세요.
+    - 1개 이상의 `Custom Hook`을 구현하세요.
+    - **Form에 유효성 검증 기능을 적용**하세요. *유효성 검증이란, 아래의 예시들을 의미합니다.*
+        - ex: 제목을 10글자 이상 기입하지 않으면, 글을 추가할 수 없도록 제한 → `Alert` 으로 안내
+        - ex: Form에서 모든 input에 값을 입력하지 않으면, 버튼이 비활성화
+    - 버튼 **컴포넌트 1개로 모든 버튼을 구현**하세요. 모든 스타일과 기능을 버튼을 구현할 수 있는 **만능 버튼**을 만들어보는 것 입니다.
+    - `development` 환경에서만 `redux devtool`이 활성화 되도록 처리합니다.
+    - 배포된 결과물에서는 `console.log()` 가 보이지 않도록 처리합니다.
+    - `.env` 를 이용해서 API 서버의 URL 코드상에서 숨기도록 처리합니다.
+- (3) API 명세서 (프로젝트 완료 후 작성)
+    
+    프로젝트가 완료되었다면, 간이 API 서버에서 어떤 API를 사용하였는지 명세서를 작성해주세요.
+    <img width="1102" alt="스크린샷 2023-09-14 오후 5 49 59" src="https://github.com/seokjin909/hh99-react-app-lv5/assets/111734939/bc06d491-90a9-48bb-9f52-3dcb786a9c30">
+    
